@@ -142,6 +142,19 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f10x_xx.s).                                            */
 /******************************************************************************/
+extern void Axis_Data_Collect_345(void);
+extern void IMU_get(void);
+void EXTI0_IRQHandler(void)//1K
+{
+  if(EXTI_GetITStatus(EXTI_Line0) != RESET)
+  {
+		Axis_Data_Collect_345();
+	
+    /* Clear the  EXTI line 0 pending bit */
+    
+  }
+	EXTI_ClearITPendingBit(EXTI_Line0);
+}
 
 /**
   * @brief  This function handles PPP interrupt request.
